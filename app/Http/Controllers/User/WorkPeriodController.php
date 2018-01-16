@@ -16,6 +16,7 @@ class WorkPeriodController extends Controller
 
 	public function update(Request $request, WorkPeriod $workPeriod)
 	{
+
 		//clock in shortcut button was pressed
 		if($request->has('clock_in')){
 			$request->merge(['start' => Carbon::now()->format('H:i')]); 
