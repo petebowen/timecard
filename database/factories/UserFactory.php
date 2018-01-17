@@ -15,7 +15,8 @@ use Faker\Generator as Faker;
 
 $factory->define(App\User::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
+        'first_name' => $faker->firstName,
+        'last_name' => $faker->lastName,
         'email' => $faker->unique()->safeEmail,
         'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
         'remember_token' => str_random(10),
@@ -25,5 +26,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'normal_rate' => $faker->randomFloat(2,8,50),
         'overtime_rate' => $faker->randomFloat(2,8,50),
         'contracted_hours' => $faker->numberBetween(4,37),
+        'total_hours' => 0,
+        'total_pay' => 0,
     ];
 });

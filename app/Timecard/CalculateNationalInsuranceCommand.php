@@ -5,13 +5,13 @@ namespace App\Timecard;
 class CalculateNationalInsuranceCommand
 {
 
-	public function __construct()
+	public function __construct($grossPay)
 	{
-
+		$this->grossPay = $grossPay;
 	}
 
 	public function execute()
 	{
-		return 1;
+		return $this->grossPay * 0.12;
 	}
 }

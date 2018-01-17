@@ -5,6 +5,7 @@ namespace App\Models;
 use Alsofronie\Uuid\UuidModelTrait;
 use Carbon\Carbon;
 use App\Events\PayPeriodWasCreated;
+use App\Events\PayPeriodWasUpdated;
 
 class PayPeriod extends BaseModel
 {
@@ -33,6 +34,10 @@ class PayPeriod extends BaseModel
 
         static::created(function ($payPeriod) {
             event(new PayPeriodWasCreated($payPeriod));
+        });
+
+        static::updated(function ($payPeriod) {
+            event(new PayPeriodWasUpdated($payPeriod));
         });
     }
 

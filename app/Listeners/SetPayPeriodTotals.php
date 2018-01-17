@@ -32,7 +32,7 @@ class SetPayPeriodTotals
 
         $contractedHours = $payPeriod->user->contracted_hours;
         $normalRate = $payPeriod->user->normal_rate;
-        $normalRate = $payPeriod->user->overtime_rate;
+        $overtimeRate = $payPeriod->user->overtime_rate;
         
         $command = new CalculateGrossPayCommand($totalHours, $contractedHours, $normalRate, $overtimeRate);
         
@@ -40,10 +40,10 @@ class SetPayPeriodTotals
 
 
 
-        $command = new CalculateTaxCommand();//todo
+        $command = new CalculateTaxCommand($payPeriod->gross);
         $payPeriod->tax = $command->execute();
 
-        $command = new CalculateNationalInsuranceCommand();//todo
+        $command = new CalculateNationalInsuranceCommand($payPeriod->gross);
         $payPeriod->national_insurance = $command->execute();
 
         $command = new CalculateNetPayCommand($payPeriod->gross,[$payPeriod->tax, $payPeriod->national_insurance]);

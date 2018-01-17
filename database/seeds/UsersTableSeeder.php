@@ -15,10 +15,11 @@ class UsersTableSeeder extends Seeder
         //create an admin user
 
         factory(App\User::class)->create([
-            'email'     => 'prbowen@gmail.com',
-            'name'      => 'Peter Bowen',
-            'password'  => Hash::make('password'),
-            'admin'     => 1
+            'email'         => 'prbowen@gmail.com',
+            'first_name'    => 'Peter',
+            'last_name'     => 'Bowen',
+            'password'      => Hash::make('password'),
+            'admin'         => 1
             ]);
 
         //create a bunch of employee users

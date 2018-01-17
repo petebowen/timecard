@@ -7,6 +7,7 @@ use Carbon\Carbon;
 class CalculateTotalHoursCommand
 {
 	protected $workPeriods;
+	protected $totalHours = 0;
 
 	public function __construct($workPeriods)
 	{
@@ -15,7 +16,7 @@ class CalculateTotalHoursCommand
 
 	public function execute()
 	{
-		$totalHours = 0;
+		
 		$this->workPeriods->each(function($workPeriod){
 
 			$start = $workPeriod->work_date->addHours(substr($workPeriod->start, 0, 2));
@@ -25,10 +26,10 @@ class CalculateTotalHoursCommand
 			$end = $workPeriod->work_date->addHours(substr($workPeriod->end, 0, 2));
 			$end->addMinutes(substr($workPeriod->end, 3,2));
 		
-			$totalHours += ($start->diffInMinutes($end) / 60);//to get it into a decimal
+			$this->totalHours += ($start->diffInMinutes($end) / 60);//to get it into a decimal
 
 		});
 
-		return $totalHours;
+		return $this->totalHours;
 	}
 }
