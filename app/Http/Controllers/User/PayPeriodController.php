@@ -22,7 +22,7 @@ class PayPeriodController extends Controller
 		]);
 	}
 
-	public function edit(App\Models\PayPeriod $payPeriod)
+	public function edit(\App\Models\PayPeriod $payPeriod)
 	{
 		return view('user.pay_period.edit',['payPeriod' => $payPeriod]);
 	}

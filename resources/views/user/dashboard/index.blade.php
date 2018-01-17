@@ -13,7 +13,7 @@
                         
       {{ method_field('PUT') }}
 
-      @if($todaysWorkPeriod->start == '00:00')
+      @if(!$todaysWorkPeriod->start)
         <div class="form-group">  
           <input type="submit" name="clock_in" class="btn btn-success btn-huge" value="Clock in now">
         </div>
@@ -49,15 +49,15 @@
               <div class="row">
                 <div class="col-md-4">
                   <p>Total hours
-                  <p class="huge">{{ $payPeriod->normal_hours + $payPeriod->overtime_hours }}
+                  <p class="huge">{{ round($payPeriod->normal_hours + $payPeriod->overtime_hours, 2) }}
                 </div>
                 <div class="col-md-4">
                   <p>Normal time
-                  <p class="huge">{{ $payPeriod->normal_hours }}
+                  <p class="huge">{{ round($payPeriod->normal_hours, 2) }}
                 </div>
                 <div class="col-md-4">
                   <p>Overtime
-                  <p class="huge">{{ $payPeriod->overtime_hours }}
+                  <p class="huge">{{ round($payPeriod->overtime_hours, 2) }}
                 </div>
               </div>
             </div>
@@ -69,6 +69,7 @@
                 <th>Date</th>
                 <th>Time in</th>
                 <th>Time out</th>
+                <th class="text-right">Hours worked</th>
               </tr>
             </thead>
             <tbody>
@@ -82,6 +83,9 @@
                 </td>
                 <td>
                   {{ $workPeriod->end }}
+                </td>
+                <td class="text-right">
+                  {{ round($workPeriod->HoursWorked, 2) }}
                 </td>
               </tr>
 

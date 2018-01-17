@@ -33,10 +33,10 @@ class DashboardController extends Controller
             $payPeriod->overtime_rate = Auth::user()->overtime_rate;
 			$payPeriod->save();
 		}
-        //dd($payPeriod->workPeriods);
 
         //get today's work period
         $workPeriod = WorkPeriod::where('pay_period_id', $payPeriod->id)->where('work_date',Carbon::now()->toDateString() .' 00:00:00')->first();//@todo: fix this clunky workaround
+        
 
         return view('user.dashboard.index', [
         	'user' 		       => Auth::user(),

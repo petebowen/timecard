@@ -56,4 +56,44 @@ class PayPeriod extends BaseModel
         return $query->where('start', Carbon::now()->startOfWeek())
             ->where('end', Carbon::now()->endOfWeek());
     }
+
+        public function getNormalHoursAttribute($value)
+    {
+        return round($value, 2);
+    }
+
+    public function getOvertimeHoursAttribute($value)
+    {
+        return round($value, 2);
+    }
+
+    public function getNormalRateAttribute($value)
+    {
+        return round($value, 2);
+    }
+
+    public function getOvertimeRateAttribute($value)
+    {
+        return round($value, 2);
+    }
+
+    public function getGrossAttribute($value)
+    {
+        return round($value, 2);
+    }
+    
+    public function getTaxAttribute($value)
+    {
+        return round($value, 2);
+    }
+    
+    public function getNationalInsuranceAttribute($value)
+    {
+        return round($value, 2);
+    }
+    
+    public function getNetAttribute($value)
+    {
+        return round($value, 2);
+    }
 }

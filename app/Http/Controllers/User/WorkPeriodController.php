@@ -27,10 +27,8 @@ class WorkPeriodController extends Controller
 			$request->merge(['end' => Carbon::now()->format('H:i')]); 
 		}
 		
-		$workPeriod->start = $request->input('start');
-		$workPeriod->end = $request->input('end');
-		$workPeriod->save();
-
+		$workPeriod->update($request->all());
+		
 		return redirect()->back();
 	}
 }

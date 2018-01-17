@@ -23,7 +23,7 @@ class EventServiceProvider extends ServiceProvider
 
         'App\Events\PayPeriodWasUpdated' => [
             'App\Listeners\SetUserTotals',
-        ],
+        ]
     ];
 
     /**

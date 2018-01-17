@@ -26,6 +26,7 @@ Route::group(['namespace' => 'Admin','prefix' => 'admin', 'middleware' => ['web'
 
 	Route::get('/users', 'UserController@index');
 	Route::get('/users/{user}', 'UserController@show');
+	Route::put('/users/{user}', 'UserController@update');
 
 });
 

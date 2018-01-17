@@ -17,7 +17,14 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'first_name',
+        'last_name',
+        'email',
+        'password',
+        'tax_code',
+        'normal_rate',
+        'overtime_rate',
+        'contracted_hours'
     ];
 
     /**
@@ -29,6 +36,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+
     public function isAdmin()
     {
         return $this->admin;
@@ -37,5 +45,30 @@ class User extends Authenticatable
     public function payPeriods()
     {
         return $this->hasMany(\App\Models\PayPeriod::class);
+    }
+
+    public function getNormalRateAttribute($value)
+    {
+        return round($value, 2);
+    }
+
+    public function getOvertimeRateAttribute($value)
+    {
+        return round($value, 2);
+    }
+
+    public function getContractedHoursAttribute($value)
+    {
+        return round($value, 2);
+    }
+
+    public function getTotalHoursAttribute($value)
+    {
+        return round($value, 2);
+    }
+
+    public function getTotalPayAttribute($value)
+    {
+        return round($value, 2);
     }
 }

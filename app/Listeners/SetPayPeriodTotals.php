@@ -6,7 +6,8 @@ use App\Events\WorkPeriodWasUpdated;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-use App\Timecard\CalculateTotalHoursCommand;
+use App\Timecard\CalculateNormalHoursCommand;
+use App\Timecard\CalculateOvertimeHoursCommand;
 use App\Timecard\CalculateGrossPayCommand;
 use App\Timecard\CalculateTaxCommand;
 use App\Timecard\CalculateNationalInsuranceCommand;
@@ -25,31 +26,40 @@ class SetPayPeriodTotals
     {
         $payPeriod = $event->workPeriod->payPeriod;
 
+        $totalHours = $payPeriod->workPeriods->sum('HoursWorked');
 
-        //calculate gross pay
-        $command = new CalculateTotalHoursCommand($payPeriod->workPeriods);
-        $totalHours = $command->execute();
+        $command = new CalculateNormalHoursCommand($totalHours, $payPeriod->user->contracted_hours);
+        $payPeriod->normal_hours = $command->execute();
+        
+        $command = new CalculateOvertimeHoursCommand($totalHours, $payPeriod->user->contracted_hours);
+        $payPeriod->overtime_hours = $command->execute();
+        
 
-        $contractedHours = $payPeriod->user->contracted_hours;
-        $normalRate = $payPeriod->user->normal_rate;
-        $overtimeRate = $payPeriod->user->overtime_rate;
-        
-        $command = new CalculateGrossPayCommand($totalHours, $contractedHours, $normalRate, $overtimeRate);
-        
+        $command = new CalculateGrossPayCommand(
+            $payPeriod->normal_hours,
+            $payPeriod->overtime_hours,
+            $payPeriod->user->normal_rate,
+            $payPeriod->user->overtime_rate
+        );
         $payPeriod->gross = $command->execute();
-
 
 
         $command = new CalculateTaxCommand($payPeriod->gross);
         $payPeriod->tax = $command->execute();
 
+
         $command = new CalculateNationalInsuranceCommand($payPeriod->gross);
         $payPeriod->national_insurance = $command->execute();
 
-        $command = new CalculateNetPayCommand($payPeriod->gross,[$payPeriod->tax, $payPeriod->national_insurance]);
+
+        $command = new CalculateNetPayCommand(
+            $payPeriod->gross,
+            [
+                $payPeriod->tax,
+                $payPeriod->national_insurance
+            ]);
         $payPeriod->net = $command->execute();
 
         $payPeriod->save();
-
     }
 }

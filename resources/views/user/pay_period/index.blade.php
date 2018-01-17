@@ -5,8 +5,8 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-    	<div class="panel panel-default">
-            <div class="panel-heading"><h3 class="panel-title">Timesheets</h3>
+    	<div class="panel panel-info">
+            <div class="panel-heading"><h3 class="panel-title">Time sheets</h3>
             </div>
         	<table class="table">
         		<thead>
@@ -14,10 +14,10 @@
         				<th>
         					Period
         				</th>
-        				<th>
+        				<th class="text-right">
         					Normal hours
         				</th>
-        				<th>
+        				<th class="text-right">
         					Overtime hours
         				</th>
         				<th class="text-right">
@@ -27,7 +27,7 @@
         					Overtime rate
         				</th>
         				<th class="text-right">
-        					Gross
+        					Gross pay
         				</th>
         				<th class="text-right">
         					Tax
@@ -48,32 +48,30 @@
     		    		<td>
     		    			{{ $payPeriod->start->toDateString() }} to {{ $payPeriod->end->toDateString()}}
     		    		</td>
-    		    		<td>
+    		    		<td class="text-right">
     		    			{{ $payPeriod->normal_hours }}
     		    		</td>
-    		    		<td>
+    		    		<td class="text-right">
     		    			{{ $payPeriod->overtime_hours}}
     		    		</td>
     		    		<td class="text-right">
-    		    			{{ $payPeriod->normal_rate}}
+    		    			£{{ $payPeriod->normal_rate}}
     		    		</td>
     		    		<td class="text-right">
-    		    			{{ $payPeriod->overtime_rate}}
+    		    			£{{ $payPeriod->overtime_rate}}
     		    		</td>
     		    		<td class="text-right">
-    		    			{{ $payPeriod->gross}}
+    		    			£{{ $payPeriod->gross}}
     		    		</td>
     		    		<td class="text-right">
-    		    			({{ $payPeriod->tax}})
+    		    			£{{ $payPeriod->tax}}
     		    		</td>
     		    		<td class="text-right">
-    		    			({{ $payPeriod->national_insurance}})
+    		    			£{{ $payPeriod->national_insurance}}
     		    		</td>
     		    		<td class="text-right">
-    		    			<strong>{{ $payPeriod->net}}</strong>
+    		    			<strong>£{{ $payPeriod->net}}</strong>
     		    		</td>
-
-
     		    	</tr>
 
     		    	@endforeach

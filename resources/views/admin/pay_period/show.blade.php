@@ -43,6 +43,7 @@
 	  						<th>Date</th>
 	  						<th>Time in</th>
 	  						<th>Time out</th>
+	  						<th class="text-right">Hours worked</th>
 	  					</tr>
 	  				</thead>
 	  				<tbody>
@@ -57,6 +58,10 @@
 	  						<td>
 	  							{{ $workPeriod->end }}
 	  						</td>
+	  						
+	  						<td class="text-right">
+			                  {{ round($workPeriod->HoursWorked, 2) }}
+			                </td>
 	  					</tr>
 
 	  					@endforeach
