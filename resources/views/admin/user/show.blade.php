@@ -19,7 +19,11 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			table with payslips here once i've got it nice enough looking in the employee view
+			@foreach($user->payPeriods as $payPeriod)
+
+				<a href="{{ url('admin/pay_periods/' . $payPeriod->id) }}">{{ $payPeriod->start }} to {{ $payPeriod->end }}</a>
+			@endforeach
+			
 		</div>
 	</div>
 </div>

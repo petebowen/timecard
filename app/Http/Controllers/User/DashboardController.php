@@ -17,7 +17,8 @@ class DashboardController extends Controller
 {
     public function index()
     {
-    	//DB::table('pay_periods')->truncate();
+
+        //DB::table('pay_periods')->truncate();
     	//DB::table('work_periods')->truncate();
     
     	//get the current pay period or create a new one
@@ -32,11 +33,15 @@ class DashboardController extends Controller
             $payPeriod->overtime_rate = Auth::user()->overtime_rate;
 			$payPeriod->save();
 		}
+        //dd($payPeriod->workPeriods);
+
+        //get today's work period
+        $workPeriod = WorkPeriod::where('pay_period_id', $payPeriod->id)->where('work_date',Carbon::now()->toDateString() .' 00:00:00')->first();//@todo: fix this clunky workaround
 
         return view('user.dashboard.index', [
-        	'user' 		=> Auth::user(),
-        	'payPeriod' => $payPeriod,
-        	'today'		=> Carbon::now()->format('l')
+        	'user' 		       => Auth::user(),
+        	'payPeriod'        => $payPeriod,
+        	'todaysWorkPeriod' => $workPeriod,
         ]);
     }
 }

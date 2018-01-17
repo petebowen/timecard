@@ -21,4 +21,9 @@ class PayPeriodController extends Controller
 			'payPeriods'	=> $payPeriods	
 		]);
 	}
+
+	public function edit(App\Models\PayPeriod $payPeriod)
+	{
+		return view('user.pay_period.edit',['payPeriod' => $payPeriod]);
+	}
 }

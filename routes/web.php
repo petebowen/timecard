@@ -22,8 +22,11 @@ Route::get('/home', 'User\DashboardController@index')->name('home');
 
 Route::group(['namespace' => 'Admin','prefix' => 'admin', 'middleware' => ['web', 'auth', 'admin']], function () {
 
+	Route::get('/pay_periods/{payPeriod}', 'PayPeriodController@show');
+
 	Route::get('/users', 'UserController@index');
 	Route::get('/users/{user}', 'UserController@show');
+
 });
 
 Route::group(['namespace' => 'User', 'prefix' => 'user', 'middleware' => ['auth','web']], function () {
@@ -32,6 +35,8 @@ Route::group(['namespace' => 'User', 'prefix' => 'user', 'middleware' => ['auth'
 	Route::get('dashboard', 'DashboardController@index');
 	
 	Route::get('pay_periods', 'PayPeriodController@index');
+
+	Route::get('pay_periods/{payPeriod}/edit', 'PayPeriodController@edit');
 	
 	Route::put('work_periods/{workPeriod}', 'WorkPeriodController@update');
 

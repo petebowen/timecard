@@ -18,8 +18,8 @@ class CreateWorkPeriodsTable extends Migration
             $table->timestamps();
             $table->unsignedInteger('pay_period_id');
             $table->date('work_date');
-            $table->time('start');
-            $table->time('end');
+            $table->time('start')->nullable();
+            $table->time('end')->nullable();
         });
     }
 
