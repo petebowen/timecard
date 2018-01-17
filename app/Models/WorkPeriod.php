@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Model;
 use Alsofronie\Uuid\UuidModelTrait;
 use Carbon\Carbon;
 use App\Events\WorkPeriodWasUpdated;
 
-class WorkPeriod extends BaseModel
+class WorkPeriod extends Model
 {
     use UuidModelTrait;
 
@@ -29,6 +30,14 @@ class WorkPeriod extends BaseModel
 
     public function getHoursWorkedAttribute()
     {
+        //can't calculate without start or end being set
+        if(!$this->start){
+            return 0;
+        }
+        if(!$this->end){
+            return 0;
+        }
+
         $start = $this->work_date->addHours(substr($this->start, 0, 2));
 
         $start->addMinutes(substr($this->start, 3,2));

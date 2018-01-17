@@ -19,23 +19,22 @@
         </div>
       
       @elseif(!$todaysWorkPeriod->end)
-        <p>You clocked in at {{ $todaysWorkPeriod->start }}. Clock out now.
         <div class="form-group">
-          <input type="submit" name="clock_out" class="btn btn-danger btn-huge" value="Clock out">
+          <input type="submit" name="clock_out" class="btn btn-danger btn-huge" value="Clock out now">
         </div>
-      @else
-        <p>You worked from {{ $todaysWorkPeriod->start }} to {{ $todaysWorkPeriod->end }} today. Need to edit your time sheet? <a href="{{ url('user/pay_periods/' . $todaysWorkPeriod->payPeriod->id . '/edit') }}">Go here</a>.
+     
       @endif
       {!! Form::close() !!}
     </div>
   </div>
   <div class="row">
     <div class="col-md-12">
-      <div class="panel panel-info">
+      <div class="panel panel-primary">
         <div class="panel-heading">
-          <h3 class="panel-title">Time sheet <span class="pull-right"><a href="{{ url('user/pay_periods/' . $payPeriod->id . '/edit') }}">Edit</a></span></h3>
+          <h3 class="panel-title">Time sheet</h3>
         </div>
         <div class="panel-body">
+           <a href="{{ url('user/pay_periods/' . $payPeriod->id . '/edit') }}" class="pull-right">Edit time worked</a>
           <p>For: <strong>{{ $payPeriod->user->first_name }} {{ $payPeriod->user->last_name}}</strong>
 
           <p>Period: <strong>{{ $payPeriod->start->toDateString() }}</strong> to <strong>{{ $payPeriod->end->toDateString() }}</strong>
@@ -44,7 +43,7 @@
           <p>Overtime rate: <strong>£{{ $payPeriod->overtime_rate }}</strong>
 
 
-          <div class="panel panel-info">
+          <div class="panel panel-primary">
             <div class="panel-body">
               <div class="row">
                 <div class="col-md-4">

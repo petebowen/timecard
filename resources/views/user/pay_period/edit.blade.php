@@ -5,7 +5,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12"> 
-      <div class="panel panel-info">
+      <div class="panel panel-primary">
         <div class="panel-heading">
           <h3 class="panel-title">Edit recorded times for the period {{$payPeriod->start->toDateString()}} to {{$payPeriod->end->toDateString()}}</h3>
         </div>
@@ -30,16 +30,16 @@
 
                   <div class="form-group">
                       {!! Form::label('start','Start') !!}
-                      {!! Form::time('start') !!}
+                      {!! Form::time('start',null, ['class' => 'form-control']) !!}
                   </div>
 
                   <div class="form-group">
                       {!! Form::label('end','End') !!}
-                      {!! Form::time('end') !!}
+                      {!! Form::time('end',null, ['class' => 'form-control']) !!}
                   </div>
 
                   <div class="form-group">
-                      <button type="submit" class="btn btn-info">Save changes</button>
+                      <button type="submit" class="btn btn-primary">Save changes</button>
                   </div>
 
                 {!! Form::close() !!}

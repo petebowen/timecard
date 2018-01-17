@@ -5,7 +5,7 @@
 <div class="container"> 
   <div class="row">
   	<div class="col-md-12">
-	  	<div class="panel panel-info">
+	  	<div class="panel panel-primary">
 	  		<div class="panel-heading">
 	  			<h3 class="panel-title">Time sheet</h3> 
 	  		</div>
@@ -18,7 +18,7 @@
 	  			<p>Overtime rate: <strong>£{{ $payPeriod->overtime_rate }}</strong>
 
 
-	  			<div class="panel panel-info">
+	  			<div class="panel panel-primary">
 	  				<div class="panel-body">
 	  					<div class="row">
 	  						<div class="col-md-4">

@@ -2,34 +2,21 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Model;
 use Alsofronie\Uuid\UuidModelTrait;
 use Carbon\Carbon;
 use App\Events\PayPeriodWasCreated;
 use App\Events\PayPeriodWasUpdated;
 
-class PayPeriod extends BaseModel
+class PayPeriod extends Model
 {
     use UuidModelTrait;
 
     protected $dates = ['start','end'];
-    
-    protected $defaults = [
-        'normal_hours' => 0,
-        'overtime_hours' => 0,
-        'normal_rate'   => 0,
-        'overtime_rate' => 0,
-        'gross' => 0,
-        'tax'   => 0,
-        'national_insurance' => 0,
-        'net'   => 0,
-    ];
-    
     protected $fillable = ['user_id'];
-    protected $guarded = [];
     
     public static function boot()
     {
-
         parent::boot();
 
         static::created(function ($payPeriod) {
@@ -48,7 +35,7 @@ class PayPeriod extends BaseModel
 
     public function workPeriods()
     {
-        return $this->hasMany(\App\Models\WorkPeriod::class);
+        return $this->hasMany(\App\Models\WorkPeriod::class)->orderBy('work_date');
     }
 
     public function scopeCurrent($query)

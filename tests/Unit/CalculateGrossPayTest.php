@@ -12,38 +12,30 @@ class CalculateGrossPayTest extends TestCase
     /** @test **/
     public function gross_pay_calculated_correctly_with_overtime()
     {
-        $totalHours = 50;
-        $contractedHours = 40;
+        $normalHours = 40;
+        $overtimeHours = 10;
         $normalRate = 10;
         $overtimeRate = 20;
 
-    	$command = new CalculateGrossPayCommand($totalHours, $contractedHours, $normalRate, $overtimeRate);
+    	$command = new CalculateGrossPayCommand($normalHours, $overtimeHours, $normalRate, $overtimeRate);
 
-    	//overtime = total 50 - contracted 40 = 10 x overtime rate 20 = 200
-
-    	//normal time = total 50 - overtime 10 = 40 x normal rate 10 = 400
-
-    	//gross pay = 200 +400 = 600
-
+        //40 hours normal time x 10 normal rate = 400
+        //plus
+        //10 hours overtime x 20 overtime rate = 200
+       
         $this->assertEquals(600, $command->execute());
     }
 
     /** @test **/
     public function gross_pay_calculated_correctly_without_overtime()
     {
-        $totalHours = 30;
-        $contractedHours = 40;
+        $normalHours = 40;
+        $overtimeHours = 0;
         $normalRate = 10;
         $overtimeRate = 20;
 
-    	$command = new CalculateGrossPayCommand($totalHours, $contractedHours, $normalRate, $overtimeRate);
+        $command = new CalculateGrossPayCommand($normalHours, $overtimeHours, $normalRate, $overtimeRate);
 
-    	//overtime = total 30 - contracted 40 = -10 (therefore 0) x overtime rate 20 = 0
-
-    	//normal time = total 30 - overtime 0 = 30 x normal rate 10 = 300
-
-    	//gross pay = 0 + 300 = 300
-
-        $this->assertEquals(300, $command->execute());
+        $this->assertEquals(400, $command->execute());
     }
 }

@@ -17,8 +17,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'User\DashboardController@index')->name('home');
-
 
 Route::group(['namespace' => 'Admin','prefix' => 'admin', 'middleware' => ['web', 'auth', 'admin']], function () {
 

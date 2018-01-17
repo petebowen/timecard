@@ -5,7 +5,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-    	<div class="panel panel-info">
+    	<div class="panel panel-primary">
             <div class="panel-heading"><h3 class="panel-title">Time sheets</h3>
             </div>
         	<table class="table">

@@ -9,8 +9,6 @@ use App\Models\PayPeriod;
 use App\Models\WorkPeriod;
 use Carbon\Carbon;
 
-use Illuminate\Support\Facades\DB;
-
 use Auth;
 
 class DashboardController extends Controller
@@ -18,9 +16,6 @@ class DashboardController extends Controller
     public function index()
     {
 
-        //DB::table('pay_periods')->truncate();
-    	//DB::table('work_periods')->truncate();
-    
     	//get the current pay period or create a new one
     	//@todo: tidy this up to use firstOrCreate
 		if(!$payPeriod = PayPeriod::where('user_id', Auth::id())->current()->first()){
@@ -35,9 +30,8 @@ class DashboardController extends Controller
 		}
 
         //get today's work period
-        $workPeriod = WorkPeriod::where('pay_period_id', $payPeriod->id)->where('work_date',Carbon::now()->toDateString() .' 00:00:00')->first();//@todo: fix this clunky workaround
+        $workPeriod = WorkPeriod::where('pay_period_id', $payPeriod->id)->where('work_date',Carbon::now()->toDateString() .' 00:00:00')->first();//@todo: fix this clunky workaround or move this to a scope in the model
         
-
         return view('user.dashboard.index', [
         	'user' 		       => Auth::user(),
         	'payPeriod'        => $payPeriod,
