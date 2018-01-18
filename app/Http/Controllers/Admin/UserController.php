@@ -14,12 +14,11 @@ class UserController extends Controller
     public function index()
     {
     	return view('admin.user.index',['users' => User::orderBy('last_name')->get()]);
-    	
     }
 
     public function show(\App\User $user)
     {
-    	return view('admin/user.edit', ['user' => $user]);
+    	return view('admin.user.edit', ['user' => $user]);
     }
 
     public function update(Request $request, \App\User $user)

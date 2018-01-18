@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
+use App\Models\PayPeriod;
 use Carbon\Carbon;
 
 class PayPeriodsTableSeeder extends Seeder
@@ -16,19 +17,17 @@ class PayPeriodsTableSeeder extends Seeder
         User::all()->each(function($user){
 
         	//create a bunch of historical PayPeriods
-            for ($i=0; $i < 30; $i++) { 
+            //doing it like this to trigger creating work periods
+            for ($i=1; $i < 11; $i++) { 
                 
-
-                //create historical pay periods for user
-        		factory(App\Models\PayPeriod::class)->create([
-
-        			'user_id' => $user->id,
-        			'start'	=> Carbon::now()->subWeeks($i)->startOfWeek(),
-        			'end'	=> Carbon::now()->subWeeks($i)->endOfWeek(),
-                    'normal_rate' => $user->normal_rate,
-                    'overtime_rate' => $user->overtime_rate,
-
-        		]);
+                $payPeriod = new PayPeriod();
+                $payPeriod->user_id = $user->id;
+                $payPeriod->start = Carbon::now()->subWeeks($i)->startOfWeek();
+                $payPeriod->end = Carbon::now()->subWeeks($i)->endOfWeek();
+                $payPeriod->normal_rate = $user->normal_rate;
+                $payPeriod->overtime_rate = $user->overtime_rate;
+                $payPeriod->save();
+            
             }
         });
             

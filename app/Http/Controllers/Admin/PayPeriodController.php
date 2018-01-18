@@ -11,7 +11,6 @@ use Auth;
 
 class PayPeriodController extends Controller
 {
-
 	public function show(\App\Models\PayPeriod $payPeriod)
 	{
 		return view('admin.pay_period.show',['payPeriod' => $payPeriod]);

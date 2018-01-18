@@ -30,7 +30,7 @@ class DashboardController extends Controller
 		}
 
         //get today's work period
-        $workPeriod = WorkPeriod::where('pay_period_id', $payPeriod->id)->where('work_date',Carbon::now()->toDateString() .' 00:00:00')->first();//@todo: fix this clunky workaround or move this to a scope in the model
+        $workPeriod = WorkPeriod::where('pay_period_id', $payPeriod->id)->where('work_date',Carbon::now()->toDateString() .' 00:00:00')->first();//@todo: fix this clunky workaround and move this to a scope in the model
         
         return view('user.dashboard.index', [
         	'user' 		       => Auth::user(),

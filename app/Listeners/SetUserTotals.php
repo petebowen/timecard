@@ -24,6 +24,7 @@ class SetUserTotals
         $command = new CalculateUsersTotalHoursCommand($payPeriods);
         $user->total_hours = $command->execute();
 
+
         $command = new CalculateUsersTotalPayCommand($payPeriods);
         $user->total_pay = $command->execute();
         

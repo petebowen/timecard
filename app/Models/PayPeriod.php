@@ -44,7 +44,7 @@ class PayPeriod extends Model
             ->where('end', Carbon::now()->endOfWeek());
     }
 
-        public function getNormalHoursAttribute($value)
+    public function getNormalHoursAttribute($value)
     {
         return round($value, 2);
     }

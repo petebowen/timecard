@@ -44,7 +44,7 @@ class User extends Authenticatable
 
     public function payPeriods()
     {
-        return $this->hasMany(\App\Models\PayPeriod::class);
+        return $this->hasMany(\App\Models\PayPeriod::class)->orderBy('start','desc');
     }
 
     public function getNormalRateAttribute($value)

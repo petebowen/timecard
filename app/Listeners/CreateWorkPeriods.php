@@ -23,7 +23,7 @@ class CreateWorkPeriods
             
             $workPeriod = new WorkPeriod;
             $workPeriod->pay_period_id = $event->payPeriod->id;
-            $workPeriod->work_date = $event->payPeriod->start->addDays($i);//removed toDateString()
+            $workPeriod->work_date = $event->payPeriod->start->addDays($i);
 
             $workPeriod->save();
         }

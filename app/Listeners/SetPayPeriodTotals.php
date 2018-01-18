@@ -31,6 +31,7 @@ class SetPayPeriodTotals
         $command = new CalculateNormalHoursCommand($totalHours, $payPeriod->user->contracted_hours);
         $payPeriod->normal_hours = $command->execute();
         
+        
         $command = new CalculateOvertimeHoursCommand($totalHours, $payPeriod->user->contracted_hours);
         $payPeriod->overtime_hours = $command->execute();
         

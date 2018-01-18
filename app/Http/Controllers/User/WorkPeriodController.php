@@ -13,16 +13,15 @@ use Auth;
 
 class WorkPeriodController extends Controller
 {
-
 	public function update(Request $request, WorkPeriod $workPeriod)
 	{
 
-		//clock in shortcut button was pressed
+		//clock in button was pressed
 		if($request->has('clock_in')){
 			$request->merge(['start' => Carbon::now()->format('H:i')]); 
 		}
 
-		//clock out shortcut button was pressed
+		//clock out button was pressed
 		if($request->has('clock_out')){
 			$request->merge(['end' => Carbon::now()->format('H:i')]); 
 		}

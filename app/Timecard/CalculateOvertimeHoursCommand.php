@@ -18,6 +18,7 @@ class CalculateOvertimeHoursCommand
 		if($this->totalHours < $this->contractedHours){
 			return 0;
 		}
+		
 		return $this->totalHours - $this->contractedHours;
 	}
 }

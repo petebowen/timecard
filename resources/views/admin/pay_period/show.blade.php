@@ -17,7 +17,6 @@
 	  			<p>Normal rate: <strong>£{{ $payPeriod->normal_rate }}</strong>
 	  			<p>Overtime rate: <strong>£{{ $payPeriod->overtime_rate }}</strong>
 
-
 	  			<div class="panel panel-primary">
 	  				<div class="panel-body">
 	  					<div class="row">
@@ -36,7 +35,6 @@
 	  					</div>
 	  				</div>
 	  			</div>
-
 	  			<table class="table">
 	  				<thead>
 	  					<tr>
@@ -58,38 +56,43 @@
 	  						<td>
 	  							{{ $workPeriod->end }}
 	  						</td>
-	  						
 	  						<td class="text-right">
-			                  {{ round($workPeriod->HoursWorked, 2) }}
-			                </td>
+			             {{ $workPeriod->HoursWorked }}
+			         </td>
 	  					</tr>
-
 	  					@endforeach
 	  				</tbody>
 	  			</table>
-
 	  			<div class="row">
 	  				<div class="col-md-4">
 	  					<table class="table table-bordered">
-	  				<tbody>
-	  					<tr>
-	  						<th>Gross pay</th>
-	  						<td class="text-right">£{{ round($payPeriod->gross,2) }}</td>
-	  					</tr>
-	  					<tr>
-	  						<th>Tax</th>
-	  						<td class="text-right">(£{{ round($payPeriod->tax,2) }})</td>
-	  					</tr>
-	  					<tr>
-	  						<th>National insurance</th>
-	  						<td class="text-right">(£{{ round($payPeriod->national_insurance,2) }})</td>
-	  					</tr>
-	  					<tr>
-	  						<th>Net pay</th>
-	  						<td class="text-right"><strong>£{{ round($payPeriod->net,2) }}</strong></td>
-	  					</tr>
-	  				</tbody>
-	  			</table>
+    	  				<tbody>
+    	  					<tr>
+    	  						<th>Gross pay</th>
+    	  						<td class="text-right">
+                      £{{ $payPeriod->gross }}
+                    </td>
+    	  					</tr>
+    	  					<tr>
+    	  						<th>Tax</th>
+    	  						<td class="text-right">
+                      (£{{ $payPeriod->tax }})
+                    </td>
+    	  					</tr>
+    	  					<tr>
+    	  						<th>National insurance</th>
+    	  						<td class="text-right">
+                      (£{{ $payPeriod->national_insurance }})
+                    </td>
+    	  					</tr>
+    	  					<tr>
+    	  						<th>Net pay</th>
+    	  						<td class="text-right">
+                      <strong>£{{ $payPeriod->net }}</strong>
+                    </td>
+    	  					</tr>
+    	  				</tbody>
+    	  			</table>
 	  				</div>
 	  			</div>
 	  		</div>

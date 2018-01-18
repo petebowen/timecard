@@ -34,6 +34,7 @@ class WorkPeriod extends Model
         if(!$this->start){
             return 0;
         }
+        
         if(!$this->end){
             return 0;
         }

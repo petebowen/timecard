@@ -9,7 +9,7 @@ $factory->define(App\Models\WorkPeriod::class, function (Faker $faker) {
             return factory(App\Models\PayPeriod::class)->create()->id;
         },
         'work_date' => $faker->date(),
-        'start' => $faker->time(),
-        'end' => $faker->time(),
+        'start' => $faker->time('H:i'),
+        'end' => $faker->time('H:i'),//problem:end could be earlier than start
     ];
 });
